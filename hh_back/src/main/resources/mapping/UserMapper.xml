@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper
+3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hh.demo.dao.UserMapper">
+<!--    <select id="getUser"-->
+<!--            resultType="com.hnucm.springboot.pojo.User">-->
+<!--        select * from user ;-->
+<!--    </select>-->
+<!--    <select id="findUserByid"-->
+<!--            resultType="com.hnucm.springboot.pojo.User"-->
+<!--            parameterType="Integer">-->
+<!--        select * from user where id = #{id}-->
+<!--    </select>-->
+<!--    <delete id="deleteUserById" parameterType="Integer">-->
+<!--        delete from user where id = #{id}-->
+<!--    </delete>-->
+<!--    <insert id="addUser"-->
+<!--            parameterType="com.hnucm.springboot.pojo.User">-->
+<!--        insert into user (name,age) values (#{name},#{age})-->
+<!--    </insert>-->
+<!--    <update id="updateUser"-->
+<!--            parameterType="com.hnucm.springboot.pojo.User">-->
+<!--        update user set name = #{name },age = #{age} where-->
+<!--            id = #{id}-->
+<!--    </update>-->
+</mapper>
