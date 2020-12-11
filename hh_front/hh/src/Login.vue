@@ -1,68 +1,91 @@
 <template>
-  <div>
-    <h3>这是登陆界面</h3>
-
-    <input type="text" placeholder="请输入用户名" v-model="username" />
-
-    <input type="password" placeholder="请输入密码" v-model="password" />
-    <button v-on:click="login">登录</button>
-
-    <p>
-      <router-link to="/B">没有账号？马上注册</router-link>
-    </p>
-    <!-- <p v-on:click="ToRegister">没有账号？马上注册</p> -->
-    <br />
-    <!-- <router-link to="/">返回</router-link> -->
-  </div>
+	<div class="login-container">
+		<el-form :model="ruleForm2" :rules="rules2" status-icon ref="ruleForm2" label-position="left" label-width="0px" class="demo-ruleForm login-page">
+			<h3 class="title">系统登录</h3>
+			<el-form-item prop="username">
+				<el-input type="text" v-model="ruleForm2.username" auto-complete="off" placeholder="用户名"></el-input>
+			</el-form-item>
+			<el-form-item prop="password">
+				<el-input type="password" v-model="ruleForm2.password" auto-complete="off" placeholder="密码"></el-input>
+			</el-form-item>
+			<el-checkbox v-model="checked" class="rememberme">记住密码</el-checkbox>
+			<el-form-item style="width:100%;">
+				<el-button type="primary" style="width:100%;" @click="handleSubmit" :loading="logining">登录</el-button>
+			</el-form-item>
+		</el-form>
+	</div>
 </template>
-
+<script>
+	export default {
+		data() {
+			return {
+				logining: false,
+				ruleForm2: {
+					username: 'admin',
+					password: '123456',
+				},
+				rules2: {
+					username: [{
+						required: true,
+						message: 'please enter your account',
+						trigger: 'blur'
+					}],
+					password: [{
+						required: true,
+						message: 'enter your password',
+						trigger: 'blur'
+					}]
+				},
+				checked: false
+			}
+		},
+		methods: {
+			handleSubmit() {
+				this.$refs.ruleForm2.validate((valid) => {
+					if (valid) {
+						this.logining = true;
+						if (this.ruleForm2.username === 'admin' &&
+							this.ruleForm2.password === '123456') {
+							this.logining = false;
+							sessionStorage.setItem('user', this.ruleForm2.username);
+							this.$router.push({
+								path: '/Main'
+							});
+						} else {
+							this.logining = false;
+							this.$alert('username or password wrong!', 'info', {
+								confirmButtonText: 'ok'
+							})
+						}
+					} else {
+						console.log('error submit!');
+						return false;
+					}
+				})
+			}
+		}
+	};
+</script>
 
 <style>
-.login-wrap {
-  text-align: center;
-}
-h3 {
-  text-align: center;
-}
-span {
-  text-align: center;
-}
-input {
-  display: block;
-  width: 250px;
-  height: 40px;
-  line-height: 40px;
-  margin: 0 auto;
-  margin-bottom: 10px;
-  outline: none;
-  border: 1px solid #888;
-  padding: 10px;
-  box-sizing: border-box;
-}
+	.login-container {
+		width: 100%;
+		height: 100%;
+	}
 
-p {
-  color: red;
-  text-align: center;
-}
+	.login-page {
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+		margin: 180px auto;
+		width: 350px;
+		padding: 35px 35px 15px;
+		background: #fff;
+		border: 1px solid #eaeaea;
+		box-shadow: 0 0 25px #cac6c6;
+	}
 
-button {
-  display: block;
-  width: 250px;
-  height: 40px;
-  line-height: 40px;
-  margin: 0 auto;
-  border: none;
-  background-color: #41b883;
-  color: #fff;
-  font-size: 16px;
-  margin-bottom: 5px;
-}
-
-span {
-  cursor: pointer;
-}
-
-span:hover {
-  color: #41b883;
-}
+	label.el-checkbox.rememberme {
+		margin: 0px 0px 15px;
+		text-align: left;
+	}
 </style>
