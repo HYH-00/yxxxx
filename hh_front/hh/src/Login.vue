@@ -21,9 +21,10 @@
 			return {
 				logining: false,
 				ruleForm2: {
-					username: 'admin',
-					password: '123456',
+					username: '123',
+					password: '123',
 				},
+
 				rules2: {
 					username: [{
 						required: true,
@@ -41,22 +42,45 @@
 		},
 		methods: {
 			handleSubmit() {
+				var that = this;
 				this.$refs.ruleForm2.validate((valid) => {
 					if (valid) {
 						this.logining = true;
-						if (this.ruleForm2.username === 'admin' &&
-							this.ruleForm2.password === '123456') {
-							this.logining = false;
-							sessionStorage.setItem('user', this.ruleForm2.username);
-							this.$router.push({
-								path: '/Main'
-							});
-						} else {
-							this.logining = false;
-							this.$alert('username or password wrong!', 'info', {
-								confirmButtonText: 'ok'
+						var thatt = this;
+						that.$axios.post("http://localhost:8088/springboot/queryByidandpwd/" + this.ruleForm2.username + "/" + this.ruleForm2
+								.password)
+							.then(function(res) {
+								console.log(res);
+								var dat = res.data;
+								// alert(dat.userId);
+								if (res.data.userId != null) {
+									thatt.logining = false;
+									sessionStorage.setItem('user', thatt.ruleForm2.username);
+									thatt.$router.push({
+										name: 'Main',
+										params: {
+											userId: dat.userId,
+											userPassword: dat.userPassword,
+											userBalance: dat.userBalance,
+											userName: dat.userName,
+											userSex: dat.userSex,
+											userLocation: dat.userLocation,
+											userDocumentType: dat.userDocumentType,
+											userIdentificationNumber: dat.userIdentificationNumber,
+											userNickName: dat.userNickName
+										}
+									});
+								} else {
+									thatt.logining = false;
+									thatt.$alert('username or password wrong!', 'info', {
+										confirmButtonText: 'ok'
+									})
+								}
+							}).catch(function(err) {
+								console.log(err);
 							})
-						}
+
+
 					} else {
 						console.log('error submit!');
 						return false;

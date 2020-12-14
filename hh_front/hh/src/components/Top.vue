@@ -33,8 +33,24 @@
 				</div>
 			</div>
 		</el-menu>
-		<el-dialog title="提示" :visible.sync="infoVisible" width="50%" :before-close="handleClose">
-			<span>这是一段信息</span>
+		<el-dialog :visible.sync="infoVisible" width="50%" :before-close="handleClose">
+			<span>昵称：{{userinfo.userNickName}}</span>
+			<br/>
+			<span>账号：{{userinfo.userId}}</span>
+			<br/>
+			<span>密码：{{userinfo.userPassword}}</span>
+			<br/>
+			<span>姓名：{{userinfo.userName}}</span>
+			<br/>
+			<span>余额：{{userinfo.userBalance}}</span>
+			<br/>
+			<span>性别：{{userinfo.userSex}}</span>
+			<br/>
+			<span>地址：{{userinfo.userLocation}}</span>
+			<br/>
+			<span>证件类型：{{userinfo.userDocumentType}}</span>
+			<br/>
+			<span>证件号：{{userinfo.userIdentificationNumber}}</span>
 			<span slot="footer" class="dialog-footer">
 				<el-button @click="infoVisible = false">取 消</el-button>
 				<el-button type="primary" @click="infoVisible = false">确 定</el-button>
@@ -44,13 +60,13 @@
 </template>
 <script>
 	export default {
+		props:['userinfo'],
 		data() {
 			return {
 				activeIndex: '处理中心',
 				activeIndex2: '1',
 				headUrl: 'https://s3.ax1x.com/2020/12/11/rAAung.jpg',
 				infoVisible: false
-
 			};
 		},
 		methods: {
