@@ -7,6 +7,6 @@ import java.util.List;
 
 @Mapper
 public interface WechatmomentsMapper {
-    public List<Wechatmoments> getWechatmoments(int row,int num);
+    public List<Wechatmoments> getWechatmoments();
     public int getRowNum();
 }

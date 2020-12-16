@@ -4,7 +4,7 @@
 <mapper namespace="com.hh.demo.dao.WechatmomentsMapper">
     <select id="getWechatmoments"
             resultType="com.hh.demo.pojo.Wechatmoments">
-        select * from wechatmoments limit #{row},#{num};
+        select * from wechatmoments order by wechatmomentsId desc;
     </select>
     <select id="getRowNum"
             resultType="Integer">

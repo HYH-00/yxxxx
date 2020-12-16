@@ -6,4 +6,11 @@
             resultType="com.hh.demo.pojo.Fabulous">
         select * from fabulous where wechatmomentsId=#{id};
     </select>
+    <insert id="insertFabulous"
+            parameterType="com.hh.demo.pojo.Fabulous">
+        insert into fabulous (fabulousId,wechatmomentsId,userNick) values (#{fabulousId},#{wechatmomentsId},#{userNick});
+    </insert>
+    <delete id="deleteFabulousBywIdAndNick">
+        delete from fabulous where wechatmomentsId=#{id} and userNick=#{Nick};
+    </delete>
 </mapper>

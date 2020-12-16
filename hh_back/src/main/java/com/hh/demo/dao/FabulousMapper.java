@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface FabulousMapper {
     public List<Fabulous> queryFabulousByWechatmomentsId(int id);
+    public int insertFabulous(Fabulous fabulous);
+    public int deleteFabulousBywIdAndNick(int id,String Nick);
 }

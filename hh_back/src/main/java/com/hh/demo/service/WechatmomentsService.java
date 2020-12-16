@@ -22,7 +22,7 @@ public class WechatmomentsService {
     @Autowired
     CommentMapper commentMapper;
     public List<Wechatmoments> getWechatmoments(){
-        List<Wechatmoments> w=wechatmomentsMapper.getWechatmoments(getRowNum()-10,10);
+        List<Wechatmoments> w=wechatmomentsMapper.getWechatmoments();
         int lw=w.size();
         List<Wechatmoments> list=new ArrayList<>();
         for(Wechatmoments item:w){
@@ -49,5 +49,11 @@ public class WechatmomentsService {
     }
     public int insertComment(Comment comment){
         return commentMapper.insertComment(comment);
+    }
+    public int insertFabulous(Fabulous fabulous){
+        return fabulousMapper.insertFabulous(fabulous);
+    }
+    public int deleteFabulousBywIdAndNick(int id,String Nick){
+        return fabulousMapper.deleteFabulousBywIdAndNick(id,Nick);
     }
 }
