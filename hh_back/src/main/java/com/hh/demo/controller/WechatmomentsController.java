@@ -18,15 +18,33 @@ public class WechatmomentsController {
     @Autowired
     WechatmomentsService wechatmomentsService;
 
+    /**
+     * 获取朋友圈数据
+     * @return
+     */
     @RequestMapping("getWechatmoments")
     public List<Wechatmoments> getWechatmoments(){
         List list=wechatmomentsService.getWechatmoments();
         return list;
     }
+
+    /**
+     * 获取朋友圈数据行数
+     * @return
+     */
     @RequestMapping("getRowNum")
     public int getRowNum(){
         return wechatmomentsService.getRowNum();
     }
+
+    /**
+     * 添加评论
+     * @param content
+     * @param wechatmomentsId
+     * @param respondents
+     * @param recipient
+     * @return
+     */
     @RequestMapping("insertComment/{content}/{wechatmomentsId}/{respondents}/{recipient}")
     public int insertComment(@PathVariable String content,@PathVariable int wechatmomentsId,@PathVariable String respondents,@PathVariable String recipient){
         Comment comment=new Comment();
@@ -37,6 +55,13 @@ public class WechatmomentsController {
         comment.setRecipient(recipient);
         return wechatmomentsService.insertComment(comment);
     }
+
+    /**
+     * 添加点赞
+     * @param wechatmomentsId
+     * @param userNick
+     * @return
+     */
     @RequestMapping("insertFabulous/{wechatmomentsId}/{userNick}")
     public int insertFabulous(@PathVariable int wechatmomentsId,@PathVariable String userNick){
         System.out.println("insert");
@@ -46,6 +71,13 @@ public class WechatmomentsController {
         fabulous.setFabulousId(0);
         return wechatmomentsService.insertFabulous(fabulous);
     }
+
+    /**
+     * 删除点赞
+     * @param id
+     * @param Nick
+     * @return
+     */
     @RequestMapping("deleteFabulousBywIdAndNick/{id}/{Nick}")
     public int deleteFabulousBywIdAndNick(@PathVariable int id,@PathVariable String Nick){
         System.out.println("delete");

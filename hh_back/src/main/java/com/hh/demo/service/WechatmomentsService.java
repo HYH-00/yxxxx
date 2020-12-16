@@ -21,6 +21,11 @@ public class WechatmomentsService {
     FabulousMapper fabulousMapper;
     @Autowired
     CommentMapper commentMapper;
+
+    /**
+     * 获取朋友圈数据（全部）
+     * @return
+     */
     public List<Wechatmoments> getWechatmoments(){
         List<Wechatmoments> w=wechatmomentsMapper.getWechatmoments();
         int lw=w.size();
@@ -32,9 +37,20 @@ public class WechatmomentsService {
         }
         return list;
     }
+
+    /**
+     * 获取朋友圈数据数
+     * @return
+     */
     public int getRowNum(){
         return wechatmomentsMapper.getRowNum();
     }
+
+    /**
+     * 查询对应朋友圈消息的点赞
+     * @param id
+     * @return
+     */
     public List<String> queryFabulousByWechatmomentsId(int id){
         List<String> list=new ArrayList<>();
         List<Fabulous> f=fabulousMapper.queryFabulousByWechatmomentsId(id);
@@ -44,15 +60,40 @@ public class WechatmomentsService {
         }
         return list;
     }
+
+    /**
+     * 查询对应朋友圈消息的评论
+     * @param id
+     * @return
+     */
     public List<Comment> queryCommentByWechatmomentsId(int id){
         return commentMapper.queryCommentByWechatmomentsId(id);
     }
+
+    /**
+     * 添加评论
+     * @param comment
+     * @return
+     */
     public int insertComment(Comment comment){
         return commentMapper.insertComment(comment);
     }
+
+    /**
+     * 添加点赞
+     * @param fabulous
+     * @return
+     */
     public int insertFabulous(Fabulous fabulous){
         return fabulousMapper.insertFabulous(fabulous);
     }
+
+    /**
+     * 删除点赞
+     * @param id
+     * @param Nick
+     * @return
+     */
     public int deleteFabulousBywIdAndNick(int id,String Nick){
         return fabulousMapper.deleteFabulousBywIdAndNick(id,Nick);
     }
