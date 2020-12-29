@@ -55,7 +55,15 @@
 								// alert(dat.userId);
 								if (res.data.userId != null) {
 									thatt.logining = false;
-									sessionStorage.setItem('user', thatt.ruleForm2.username);
+									sessionStorage.setItem('userId', dat.userId);
+									sessionStorage.setItem('userPassword', dat.userPassword);
+									sessionStorage.setItem('userBalance', dat.userBalance);
+									sessionStorage.setItem('userName', dat.userName);
+									sessionStorage.setItem('userSex', dat.userSex);
+									sessionStorage.setItem('userLocation', dat.userLocation);
+									sessionStorage.setItem('userDocumentType', dat.userDocumentType);
+									sessionStorage.setItem('userIdentificationNumber', dat.userIdentificationNumber);
+									sessionStorage.setItem('userNickName', dat.userNickName);
 									thatt.$router.push({
 										name: 'Main',
 										params: {

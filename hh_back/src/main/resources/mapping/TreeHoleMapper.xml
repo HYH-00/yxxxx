@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper
+3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hh.demo.dao.TreeHoleMapper">
+    <select id="getTreeHoleByuserId"
+            resultType="com.hh.demo.pojo.TreeHole">
+        select * from treehole where userId=#{userId}
+    </select>
+    <insert id="addTreeHole"
+            parameterType="com.hh.demo.pojo.TreeHole">
+        insert into treehole (userId,title,content,time) values (#{userId},#{title},#{content},#{time})
+    </insert>
+    <delete id="delTreeHoleByuserId">
+        delete from treehole where userId=#{userID}
+    </delete>
+    <update id="updTreeHoleByuserId"
+            parameterType="com.hh.demo.pojo.TreeHole">
+        update treehole set title=#{title},content=#{content} where userId=#{userId}
+    </update>
+</mapper>

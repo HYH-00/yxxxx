@@ -1,21 +1,29 @@
 <template>
 	<el-header id="st">
 		<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-			<el-menu-item index="树洞">树洞</el-menu-item>
+			<el-submenu index="树洞">
+				<template slot="title">树洞</template>
+				<el-menu-item index="我的树洞">我的树洞</el-menu-item>
+				<el-menu-item index="编织树枝"><i class="el-icon-edit" /></el-menu-item>
+			</el-submenu>
 			<el-submenu index="解压游戏">
 				<template slot="title">解压游戏</template>
-				<el-menu-item index="选项1">选项1</el-menu-item>
-				<el-menu-item index="选项2">选项2</el-menu-item>
-				<el-menu-item index="选项3">选项3</el-menu-item>
-				<el-submenu index="选项4">
-					<template slot="title">选项4</template>
-					<el-menu-item index="选项1">选项1</el-menu-item>
-					<el-menu-item index="选项2">选项2</el-menu-item>
-					<el-menu-item index="选项3">选项3</el-menu-item>
+				<el-menu-item index="游戏1">游戏1</el-menu-item>
+				<el-menu-item index="游戏2">游戏2</el-menu-item>
+				<el-menu-item index="游戏3">游戏3</el-menu-item>
+				<el-submenu index="游戏4">
+					<template slot="title">游戏4</template>
+					<el-menu-item index="游戏1">游戏1</el-menu-item>
+					<el-menu-item index="游戏2">游戏2</el-menu-item>
+					<el-menu-item index="游戏3">游戏3</el-menu-item>
 				</el-submenu>
 			</el-submenu>
 			<el-menu-item index="朋友圈">朋友圈</el-menu-item>
-			<el-menu-item index="在线心理按摩">在线心理按摩</el-menu-item>
+			<el-submenu index="在线心理按摩">
+				<template slot="title">在线心理按摩</template>
+				<el-menu-item index="咨询">咨询</el-menu-item>
+				<el-menu-item index="问卷">问卷</el-menu-item>
+			</el-submenu>
 			<!-- <el-menu-item index="订单管理"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item> -->
 			<div class="block" style="margin-top: 5px;">
 				<div style="float: right;">
@@ -35,21 +43,21 @@
 		</el-menu>
 		<el-dialog :visible.sync="infoVisible" width="50%" :before-close="handleClose">
 			<span>昵称：{{userinfo.userNickName}}</span>
-			<br/>
+			<br />
 			<span>账号：{{userinfo.userId}}</span>
-			<br/>
+			<br />
 			<span>密码：{{userinfo.userPassword}}</span>
-			<br/>
+			<br />
 			<span>姓名：{{userinfo.userName}}</span>
-			<br/>
+			<br />
 			<span>余额：{{userinfo.userBalance}}</span>
-			<br/>
+			<br />
 			<span>性别：{{userinfo.userSex}}</span>
-			<br/>
+			<br />
 			<span>地址：{{userinfo.userLocation}}</span>
-			<br/>
+			<br />
 			<span>证件类型：{{userinfo.userDocumentType}}</span>
-			<br/>
+			<br />
 			<span>证件号：{{userinfo.userIdentificationNumber}}</span>
 			<span slot="footer" class="dialog-footer">
 				<el-button @click="infoVisible = false">取 消</el-button>
@@ -60,10 +68,10 @@
 </template>
 <script>
 	export default {
-		props:['userinfo'],
+		props: ['userinfo'],
 		data() {
 			return {
-				activeIndex: '处理中心',
+				activeIndex: '树洞',
 				activeIndex2: '1',
 				headUrl: 'https://s3.ax1x.com/2020/12/11/rAAung.jpg',
 				infoVisible: false
@@ -75,8 +83,21 @@
 				this.$emit("Navigation_bar_selection", key);
 			},
 			handleCommand(data) {
-				if(data=="个人信息")this.infoVisible=true;
-				
+				if (data == "个人信息") this.infoVisible = true;
+				else if (data == "退出") {
+					sessionStorage.removeItem('userId');
+					sessionStorage.removeItem('userPassword');
+					sessionStorage.removeItem('userBalance');
+					sessionStorage.removeItem('userName');
+					sessionStorage.removeItem('userSex');
+					sessionStorage.removeItem('userLocation');
+					sessionStorage.removeItem('userDocumentType');
+					sessionStorage.removeItem('userIdentificationNumber');
+					sessionStorage.removeItem('userNickName');
+					this.$router.push({
+						name: 'Login'
+					});
+				}
 				this.$message(data);
 			}
 		}

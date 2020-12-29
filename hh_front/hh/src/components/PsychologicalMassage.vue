@@ -1,5 +1,10 @@
 <template>
-	<h1>Psychological massage</h1>
+	<div>
+		<h1>Psychological massage</h1>
+		<el-row>
+			
+		</el-row>
+	</div>
 </template>
 <script>
 </script>
